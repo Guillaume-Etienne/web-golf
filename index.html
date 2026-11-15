@@ -19,14 +19,14 @@
   <meta property="og:url" content="https://www.dominiquetavernini.fr/">
   <meta property="og:image" content="https://www.dominiquetavernini.fr/assets/img/og-image.jpg">
 
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
   <!-- Polices utilisées dès le premier écran : chargées en priorité -->
-  <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <script type="module" src="/assets/js/main.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script type="module" src="assets/js/main.js"></script>
 
   <!-- Données structurées pour Google (fiche entreprise locale) -->
   <script type="application/ld+json">
@@ -61,7 +61,7 @@
        aria-current="page" : à placer sur le lien de la page en cours. -->
   <header class="site-header" data-variant="overlay">
     <div class="header-inner container">
-      <a class="brand" href="/" aria-current="page">
+      <a class="brand" href="./" aria-current="page">
         <span class="brand-monogram" aria-hidden="true">DT</span>
         <span class="brand-text">
           <span class="brand-name">Dominique Tavernini</span>
@@ -75,10 +75,10 @@
           <span>Menu</span>
         </button>
         <ul id="site-menu" class="site-menu" popover="auto">
-          <li><a href="/enseignant/">L'enseignant</a></li>
-          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
-          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          <li><a href="enseignant/">L'enseignant</a></li>
+          <li><a href="cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="contact/">Contact</a></li>
           <li class="menu-cta">
             <a class="btn btn-primary btn-small" href="tel:+33608034194">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
@@ -96,11 +96,11 @@
     <section class="hero" aria-labelledby="hero-title">
       <!-- Photo temporaire (Unsplash). Format portrait sur mobile, paysage ailleurs. -->
       <picture class="hero-media">
-        <source media="(orientation: portrait)" type="image/avif" srcset="/assets/img/hero-portrait-720.avif 720w, /assets/img/hero-portrait-1080.avif 1080w" sizes="100vw">
-        <source media="(orientation: portrait)" type="image/webp" srcset="/assets/img/hero-portrait-720.webp 720w, /assets/img/hero-portrait-1080.webp 1080w" sizes="100vw">
-        <source type="image/avif" srcset="/assets/img/hero-1280.avif 1280w, /assets/img/hero-1920.avif 1920w, /assets/img/hero-2560.avif 2560w" sizes="100vw">
-        <source type="image/webp" srcset="/assets/img/hero-1280.webp 1280w, /assets/img/hero-1920.webp 1920w, /assets/img/hero-2560.webp 2560w" sizes="100vw">
-        <img src="/assets/img/hero-1920.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+        <source media="(orientation: portrait)" type="image/avif" srcset="assets/img/hero-portrait-720.avif 720w, assets/img/hero-portrait-1080.avif 1080w" sizes="100vw">
+        <source media="(orientation: portrait)" type="image/webp" srcset="assets/img/hero-portrait-720.webp 720w, assets/img/hero-portrait-1080.webp 1080w" sizes="100vw">
+        <source type="image/avif" srcset="assets/img/hero-1280.avif 1280w, assets/img/hero-1920.avif 1920w, assets/img/hero-2560.avif 2560w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/hero-1280.webp 1280w, assets/img/hero-1920.webp 1920w, assets/img/hero-2560.webp 2560w" sizes="100vw">
+        <img src="assets/img/hero-1920.jpg" alt="" width="1920" height="1080" fetchpriority="high">
       </picture>
 
       <div class="hero-content container">
@@ -108,8 +108,8 @@
         <h1 id="hero-title">Progressez au golf, <em>du green vers le départ.</em></h1>
         <p class="hero-lead">Leçons individuelles, parcours accompagnés et stages, pour tous les niveaux et tous les âges, sur les golfs du Var et de la région.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-large" href="/contact/">Réserver une leçon</a>
-          <a class="btn btn-ghost btn-large" href="/cours-et-tarifs/">Cours &amp; tarifs</a>
+          <a class="btn btn-primary btn-large" href="contact/">Réserver une leçon</a>
+          <a class="btn btn-ghost btn-large" href="cours-et-tarifs/">Cours &amp; tarifs</a>
         </div>
       </div>
 
@@ -134,11 +134,11 @@
         <div class="offers">
           <article class="card reveal">
             <picture>
-              <source type="image/avif" srcset="/assets/img/lecons-480.avif 480w, /assets/img/lecons-800.avif 800w, /assets/img/lecons-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <source type="image/webp" srcset="/assets/img/lecons-480.webp 480w, /assets/img/lecons-800.webp 800w, /assets/img/lecons-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <img src="/assets/img/lecons-800.jpg" alt="" width="800" height="600" loading="lazy">
+              <source type="image/avif" srcset="assets/img/lecons-480.avif 480w, assets/img/lecons-800.avif 800w, assets/img/lecons-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <source type="image/webp" srcset="assets/img/lecons-480.webp 480w, assets/img/lecons-800.webp 800w, assets/img/lecons-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <img src="assets/img/lecons-800.jpg" alt="" width="800" height="600" loading="lazy">
             </picture>
-            <h3><a class="card-link" href="/cours-et-tarifs/#lecons">Leçons individuelles &amp; collectives</a></h3>
+            <h3><a class="card-link" href="cours-et-tarifs/#lecons">Leçons individuelles &amp; collectives</a></h3>
             <p>Seul, à deux ou en petit groupe : une progression construite autour de votre jeu et de votre morphologie.</p>
             <footer>
               <p>Dès <strong>25&nbsp;€</strong> / pers.</p>
@@ -148,11 +148,11 @@
 
           <article class="card reveal">
             <picture>
-              <source type="image/avif" srcset="/assets/img/parcours-480.avif 480w, /assets/img/parcours-800.avif 800w, /assets/img/parcours-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <source type="image/webp" srcset="/assets/img/parcours-480.webp 480w, /assets/img/parcours-800.webp 800w, /assets/img/parcours-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <img src="/assets/img/parcours-800.jpg" alt="" width="800" height="600" loading="lazy">
+              <source type="image/avif" srcset="assets/img/parcours-480.avif 480w, assets/img/parcours-800.avif 800w, assets/img/parcours-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <source type="image/webp" srcset="assets/img/parcours-480.webp 480w, assets/img/parcours-800.webp 800w, assets/img/parcours-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <img src="assets/img/parcours-800.jpg" alt="" width="800" height="600" loading="lazy">
             </picture>
-            <h3><a class="card-link" href="/cours-et-tarifs/#parcours">Parcours accompagnés</a></h3>
+            <h3><a class="card-link" href="cours-et-tarifs/#parcours">Parcours accompagnés</a></h3>
             <p>9 ou 18 trous au côté de votre pro, avec des conseils avant, pendant et après la partie.</p>
             <footer>
               <p>9 trous dès <strong>50&nbsp;€</strong> / pers.</p>
@@ -162,11 +162,11 @@
 
           <article class="card reveal">
             <picture>
-              <source type="image/avif" srcset="/assets/img/stages-480.avif 480w, /assets/img/stages-800.avif 800w, /assets/img/stages-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <source type="image/webp" srcset="/assets/img/stages-480.webp 480w, /assets/img/stages-800.webp 800w, /assets/img/stages-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
-              <img src="/assets/img/stages-800.jpg" alt="" width="800" height="600" loading="lazy">
+              <source type="image/avif" srcset="assets/img/stages-480.avif 480w, assets/img/stages-800.avif 800w, assets/img/stages-1200.avif 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <source type="image/webp" srcset="assets/img/stages-480.webp 480w, assets/img/stages-800.webp 800w, assets/img/stages-1200.webp 1200w" sizes="(min-width: 68rem) 25rem, (min-width: 45rem) 50vw, 100vw">
+              <img src="assets/img/stages-800.jpg" alt="" width="800" height="600" loading="lazy">
             </picture>
-            <h3><a class="card-link" href="/cours-et-tarifs/#stages">Stages petit jeu &amp; carte verte</a></h3>
+            <h3><a class="card-link" href="cours-et-tarifs/#stages">Stages petit jeu &amp; carte verte</a></h3>
             <p>Approches, bunkers et putting pour gagner des coups autour du green, ou une formation carte verte à votre rythme.</p>
             <footer>
               <p>Programmes et tarifs</p>
@@ -178,7 +178,7 @@
         <div class="offers-more">
           <article class="tile tile-dark reveal">
             <p class="eyebrow">Perfectionnement</p>
-            <h3><a class="card-link" href="/cours-et-tarifs/#perfectionnement">Dans quel domaine voulez-vous progresser&nbsp;?</a></h3>
+            <h3><a class="card-link" href="cours-et-tarifs/#perfectionnement">Dans quel domaine voulez-vous progresser&nbsp;?</a></h3>
             <ul class="chips" aria-label="Thèmes de perfectionnement">
               <li>Régularité</li>
               <li>Gestion du parcours</li>
@@ -193,12 +193,12 @@
 
           <article class="tile tile-photo reveal">
             <picture>
-              <source type="image/avif" srcset="/assets/img/escapades-640.avif 640w, /assets/img/escapades-960.avif 960w, /assets/img/escapades-1280.avif 1280w" sizes="(min-width: 62rem) 37rem, 100vw">
-              <source type="image/webp" srcset="/assets/img/escapades-640.webp 640w, /assets/img/escapades-960.webp 960w, /assets/img/escapades-1280.webp 1280w" sizes="(min-width: 62rem) 37rem, 100vw">
-              <img src="/assets/img/escapades-960.jpg" alt="" width="960" height="640" loading="lazy">
+              <source type="image/avif" srcset="assets/img/escapades-640.avif 640w, assets/img/escapades-960.avif 960w, assets/img/escapades-1280.avif 1280w" sizes="(min-width: 62rem) 37rem, 100vw">
+              <source type="image/webp" srcset="assets/img/escapades-640.webp 640w, assets/img/escapades-960.webp 960w, assets/img/escapades-1280.webp 1280w" sizes="(min-width: 62rem) 37rem, 100vw">
+              <img src="assets/img/escapades-960.jpg" alt="" width="960" height="640" loading="lazy">
             </picture>
             <p class="eyebrow">Escapades &amp; séjours</p>
-            <h3><a class="card-link" href="/escapades-et-sejours/">Partir jouer ensemble</a></h3>
+            <h3><a class="card-link" href="escapades-et-sejours/">Partir jouer ensemble</a></h3>
             <p>Escapades et séjours golfiques en groupe, en France et à l'étranger, encadrés par votre pro pour découvrir de nouveaux parcours.</p>
             <p class="tile-cta" aria-hidden="true">Voir le programme <span>→</span></p>
           </article>
@@ -273,9 +273,9 @@
           <!-- À REMPLACER par un portrait de Dominique (format 4:5, voir AGENTS.md).
                Ne jamais utiliser la photo d'une autre personne à la place. -->
           <picture>
-            <source type="image/avif" srcset="/assets/img/enseignant-480.avif 480w, /assets/img/enseignant-800.avif 800w, /assets/img/enseignant-1000.avif 1000w" sizes="(min-width: 59rem) 35rem, 100vw">
-            <source type="image/webp" srcset="/assets/img/enseignant-480.webp 480w, /assets/img/enseignant-800.webp 800w, /assets/img/enseignant-1000.webp 1000w" sizes="(min-width: 59rem) 35rem, 100vw">
-            <img src="/assets/img/enseignant-800.jpg" alt="" width="800" height="1000" loading="lazy">
+            <source type="image/avif" srcset="assets/img/enseignant-480.avif 480w, assets/img/enseignant-800.avif 800w, assets/img/enseignant-1000.avif 1000w" sizes="(min-width: 59rem) 35rem, 100vw">
+            <source type="image/webp" srcset="assets/img/enseignant-480.webp 480w, assets/img/enseignant-800.webp 800w, assets/img/enseignant-1000.webp 1000w" sizes="(min-width: 59rem) 35rem, 100vw">
+            <img src="assets/img/enseignant-800.jpg" alt="" width="800" height="1000" loading="lazy">
           </picture>
           <p class="about-badge"><span>Membre</span> <strong>PGA France</strong></p>
         </figure>
@@ -315,7 +315,7 @@
             </ul>
           </div>
 
-          <a class="link-arrow" href="/enseignant/">Découvrir mon parcours <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="enseignant/">Découvrir mon parcours <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -343,15 +343,15 @@
     <!-- ===================== 5. BANDEAU « SUR LE TERRAIN » ===================== -->
     <section class="band" aria-labelledby="terrain-title">
       <picture class="band-media">
-        <source type="image/avif" srcset="/assets/img/terrain-1280.avif 1280w, /assets/img/terrain-1920.avif 1920w, /assets/img/terrain-2560.avif 2560w" sizes="100vw">
-        <source type="image/webp" srcset="/assets/img/terrain-1280.webp 1280w, /assets/img/terrain-1920.webp 1920w, /assets/img/terrain-2560.webp 2560w" sizes="100vw">
-        <img src="/assets/img/terrain-1920.jpg" alt="" width="1920" height="1080" loading="lazy">
+        <source type="image/avif" srcset="assets/img/terrain-1280.avif 1280w, assets/img/terrain-1920.avif 1920w, assets/img/terrain-2560.avif 2560w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/terrain-1280.webp 1280w, assets/img/terrain-1920.webp 1920w, assets/img/terrain-2560.webp 2560w" sizes="100vw">
+        <img src="assets/img/terrain-1920.jpg" alt="" width="1920" height="1080" loading="lazy">
       </picture>
       <div class="band-content container reveal">
         <p class="eyebrow">Sur le terrain</p>
         <h2 id="terrain-title">Le Var pour terrain de jeu</h2>
         <p>Leçons, parcours accompagnés et stages se déroulent sur les golfs du département et de la région. Dites-moi où vous jouez : nous choisissons ensemble le parcours.</p>
-        <a class="btn btn-primary" href="/contact/">Organiser une séance</a>
+        <a class="btn btn-primary" href="contact/">Organiser une séance</a>
       </div>
     </section>
 
@@ -369,7 +369,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
               06 08 03 41 94
             </a>
-            <a class="btn btn-ghost btn-large" href="/contact/">Envoyer une demande</a>
+            <a class="btn btn-ghost btn-large" href="contact/">Envoyer une demande</a>
           </div>
         </div>
 
@@ -402,7 +402,7 @@
             </div>
           </dl>
           <p class="price-note">Balles de practice et green-fees non compris.</p>
-          <a class="link-arrow" href="/cours-et-tarifs/">Voir tous les tarifs <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="cours-et-tarifs/">Voir tous les tarifs <span aria-hidden="true">→</span></a>
         </aside>
       </div>
     </section>
@@ -414,7 +414,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-about">
-        <a class="brand" href="/">
+        <a class="brand" href="./">
           <span class="brand-monogram" aria-hidden="true">DT</span>
           <span class="brand-text">
             <span class="brand-name">Dominique Tavernini</span>
@@ -428,11 +428,11 @@
       <nav aria-labelledby="footer-nav-title">
         <h2 class="footer-title" id="footer-nav-title">Navigation</h2>
         <ul class="footer-links">
-          <li><a href="/">Accueil</a></li>
-          <li><a href="/enseignant/">L'enseignant</a></li>
-          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
-          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
-          <li><a href="/contact/">Contact</a></li>
+          <li><a href="./">Accueil</a></li>
+          <li><a href="enseignant/">L'enseignant</a></li>
+          <li><a href="cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="contact/">Contact</a></li>
         </ul>
       </nav>
 
@@ -441,7 +441,7 @@
         <address>
           <p><a class="footer-phone" href="tel:+33608034194">06 08 03 41 94</a></p>
           <p>Var (83) · golfs du département et de la région</p>
-          <p><a href="/contact/">Formulaire de contact</a></p>
+          <p><a href="contact/">Formulaire de contact</a></p>
         </address>
       </div>
     </div>
@@ -449,8 +449,8 @@
     <div class="container footer-bottom">
       <p>© 2026 Dominique Tavernini · Enseignant de golf</p>
       <ul>
-        <li><a href="/mentions-legales/">Mentions légales</a></li>
-        <li><a href="/mentions-legales/#credits">Crédits photos</a></li>
+        <li><a href="mentions-legales/">Mentions légales</a></li>
+        <li><a href="mentions-legales/#credits">Crédits photos</a></li>
       </ul>
     </div>
   </footer>
@@ -461,7 +461,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
       Appeler
     </a>
-    <a class="btn btn-dark" href="/contact/">Réserver</a>
+    <a class="btn btn-dark" href="contact/">Réserver</a>
   </aside>
 </body>
 </html>

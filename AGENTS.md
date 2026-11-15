@@ -30,11 +30,18 @@ robots.txt, sitemap.xml          Référencement
 ```
 
 Une page = un dossier contenant `index.html`, pour des adresses propres (`/contact/`).
-Tous les chemins commencent par `/` (ex. `/assets/css/style.css`).
+
+**Chemins relatifs, jamais de `/` au début** : le site doit fonctionner à la racine d'un domaine
+(`www.dominiquetavernini.fr/`) comme dans un sous-dossier (aperçu GitHub Pages `…github.io/web-golf/`).
+- Dans `index.html` (à la racine) : `assets/css/style.css`, `contact/`, `./` pour l'accueil.
+- Dans une page d'un dossier (`contact/index.html`…) : `../assets/css/style.css`, `../contact/`, `../` pour l'accueil.
+- Dans `style.css` : chemins depuis le dossier `assets/css/` (`../img/contours.svg`, `../fonts/…`).
+- Exception `404.html` : elle s'affiche à n'importe quelle adresse, donc ses chemins partent de la racine
+  grâce à la balise `<base>` en haut du fichier (écrire les chemins comme dans `index.html`).
 
 ## Prévisualiser en local
 
-Les chemins en `/...` nécessitent un petit serveur (un double-clic sur le fichier ne suffit pas) :
+Les liens vers les dossiers (`contact/`) nécessitent un petit serveur (un double-clic sur le fichier ne suffit pas) :
 
 ```
 npx serve .
@@ -69,7 +76,8 @@ Les tarifs apparaissent à **plusieurs endroits** ; les mettre tous à jour :
 Dans les tableaux, chaque cellule de prix garde son attribut `data-label` (libellé affiché sur mobile).
 
 ### Ajouter une page
-1. Créer `nom-de-la-page/index.html` en copiant une page intérieure (ex. `contact/index.html`).
+1. Créer `nom-de-la-page/index.html` en copiant une page intérieure (ex. `contact/index.html`) :
+   ses chemins en `../` restent justes pour une page placée dans un dossier.
 2. Garder à l'identique : `<head>` (adapter `<title>`, `description`, `canonical`, `og:*`), en-tête,
    pied de page, barre `.mobile-cta`.
 3. Seule la page d'accueil a `data-variant="overlay"` sur `<header class="site-header">`
@@ -148,6 +156,9 @@ Ne pas utiliser le raccourci CSS `font:` : il réinitialise les chiffres aligné
 
 Hébergement statique (aucun serveur d'application nécessaire). Déploiement prévu par GitHub Actions
 ou par envoi FTP : à documenter ici une fois choisi.
+
+- **Aperçu** : GitHub Pages, https://guillaume-etienne.github.io/web-golf/ (mis à jour à chaque push sur `main`).
+  Le site y est dans un sous-dossier : d'où la règle des chemins relatifs (voir « Structure »).
 
 - **Hébergement Apache** (OVH, o2switch, Ionos…) : `.htaccess` gère déjà les redirections 301 des
   anciennes adresses WordPress (`/accueil/...`), la page 404, la compression et le cache.
