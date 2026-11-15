@@ -1,0 +1,1645 @@
+/* ==========================================================================
+   Dominique Tavernini · Enseignant de golf
+   Feuille de style unique du site (aucun framework, aucune compilation).
+
+   SOMMAIRE
+   1. Polices
+   2. Variables : couleurs, typographie, espacements  ← la charte se règle ici
+   3. Base
+   4. Mise en page (conteneur, sections)
+   5. Composants : eyebrow, boutons, liens, cartes, puces
+   6. En-tête et navigation
+   7. Page d'accueil : sections
+   8. Pied de page et barre de contact mobile
+   9. Animations (toujours facultatives : le site fonctionne sans)
+   ========================================================================== */
+
+
+/* 1. POLICES ---------------------------------------------------------------
+   Hébergées sur le site (pas d'appel à Google Fonts : plus rapide, conforme RGPD).
+   Fichiers « variables » : toutes les graisses dans un seul fichier. */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/assets/fonts/cormorant-garamond-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/assets/fonts/cormorant-garamond-latin-wght-italic.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/assets/fonts/manrope-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* 2. VARIABLES ------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Couleurs de la marque */
+  --green-950: #0e2116;   /* pied de page */
+  --green-900: #163323;   /* sections sombres, en-tête */
+  --green-800: #1f3d2b;   /* vert principal */
+  --green-700: #2b5139;
+  --ivory: #f6f2e9;       /* texte clair sur fond vert */
+  --ivory-2: #eee7d8;     /* fond des sections alternées */
+  --paper: #fbf9f4;       /* fond général */
+  --brass: #b08d57;       /* laiton : accents décoratifs */
+  --brass-light: #c9a66b; /* laiton clair : boutons, accents sur fond vert */
+  --brass-ink: #7d5f2e;   /* laiton foncé : petits textes sur fond clair (contraste AA) */
+  --ink: #1b2520;         /* texte principal */
+  --ink-muted: #4f5a52;   /* texte secondaire */
+  --line: rgb(27 37 32 / 0.12);
+  --line-light: rgb(246 242 233 / 0.2);
+  --text-on-dark: rgb(246 242 233 / 0.82);
+
+  /* Typographie */
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --step--1: 0.875rem;
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.05rem + 0.35vw, 1.3rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2.1rem);
+  --step-3: clamp(2.25rem, 1.6rem + 2.6vw, 3.9rem);
+  --step-4: clamp(2.7rem, 1.6rem + 4.6vw, 5.75rem);
+
+  /* Espacements et formes */
+  --container: 76rem;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --space-section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --radius: 0.25rem;
+  --radius-lg: 1rem;
+  --header-h: 4.5rem;
+  --shadow-lg: 0 24px 60px -28px rgb(14 33 22 / 0.45);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Taille minimale des zones cliquables (plus grande sur écran tactile) */
+  --target-size: 24px;
+}
+
+@media (pointer: coarse) {
+  :root { --target-size: 44px; }
+}
+
+
+/* 3. BASE ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* Pendant le chargement des polices, la police de secours prend la même taille
+     visuelle. Déclaré sur chaque élément (et non sur body) : la valeur est calculée
+     d'après la police de l'élément lui-même, sinon les titres en Cormorant seraient
+     agrandis selon les proportions de Manrope. */
+  font-size-adjust: from-font;
+}
+
+html {
+  /* Conteneur « scroll-state » : permet de masquer l'en-tête quand on descend (voir §6). */
+  container: root-scroller / scroll-state;
+  /* Les ancres ne passent pas sous l'en-tête collant. */
+  scroll-padding-top: var(--header-h);
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  /* Chiffres alignés (Cormorant utilise par défaut des chiffres « à l'ancienne »).
+     Ne pas utiliser le raccourci « font: » dans ce fichier : il remettrait ce réglage à zéro. */
+  font-variant-numeric: lining-nums;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); line-height: 1.2; }
+
+h1 em,
+h2 em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--brass-light);
+  color: var(--green-950);
+}
+
+/* Zones cliquables assez grandes (WCAG 2.5.8) */
+:where(button, [role="button"], nav a) {
+  min-block-size: var(--target-size);
+  min-inline-size: var(--target-size);
+}
+
+:where([role="button"], nav a) {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Texte lu par les lecteurs d'écran mais invisible à l'écran */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Lien d'évitement : visible seulement au clavier */
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  inset-block-start: -10rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--paper);
+  color: var(--green-900);
+  font-weight: 600;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  inset-block-start: 1rem;
+}
+
+
+/* 4. MISE EN PAGE ---------------------------------------------------------- */
+
+.container {
+  inline-size: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section-alt {
+  background: var(--ivory-2);
+}
+
+/* Sections sur fond vert, avec le motif « courbes de niveau » en filigrane */
+.section-dark {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--green-900);
+  color: var(--ivory);
+}
+
+.section-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/assets/img/contours.svg") right -14rem top -10rem / 60rem auto no-repeat;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.section-dark p,
+.section-dark li {
+  color: var(--text-on-dark);
+}
+
+.section-head {
+  max-inline-size: 46rem;
+  margin-block-end: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.section-head > p:last-child {
+  margin: 1.25rem 0 0;
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+}
+
+
+/* 5. COMPOSANTS ------------------------------------------------------------ */
+
+/* Petit sur-titre en capitales, précédé d'un filet */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  color: var(--brass-ink);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  inline-size: 2rem;
+  block-size: 1px;
+  background: currentColor;
+}
+
+.section-dark .eyebrow,
+.hero .eyebrow,
+.band .eyebrow,
+.tile .eyebrow {
+  color: var(--brass-light);
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-block-size: 3rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn svg {
+  flex: none;
+  inline-size: 1.15em;
+  block-size: 1.15em;
+}
+
+.btn-primary {
+  background: var(--brass-light);
+  color: var(--green-950);
+}
+
+.btn-primary:hover {
+  background: #d8b980;
+}
+
+.btn-dark {
+  background: var(--green-800);
+  color: var(--ivory);
+}
+
+.btn-dark:hover {
+  background: var(--green-700);
+}
+
+.btn-ghost {
+  border-color: color-mix(in srgb, currentColor 55%, transparent);
+  background: transparent;
+  color: inherit;
+}
+
+.btn-ghost:hover {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.btn-small {
+  min-block-size: 2.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-large {
+  min-block-size: 3.5rem;
+  padding: 1rem 1.75rem;
+  font-size: 1.0625rem;
+}
+
+/* Lien texte avec flèche */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-block-end: 1px solid currentColor;
+  padding-block-end: 0.15rem;
+}
+
+.link-arrow span {
+  transition: translate 0.2s var(--ease-out);
+}
+
+.link-arrow:hover span {
+  translate: 0.25rem 0;
+}
+
+/* Puces « étiquettes » */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--line-light);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  color: inherit;
+}
+
+/* Cartes de prestation : photo, titre, texte, pied (prix).
+   Toute la carte est cliquable grâce au lien du titre (.card-link). */
+.card {
+  position: relative;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  overflow: clip;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.3s;
+}
+
+.card > picture img {
+  inline-size: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.card > :not(picture) {
+  margin-inline: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+.card > h3 {
+  margin-block-start: 1.5rem;
+}
+
+.card > p {
+  margin-block: 0.75rem 0;
+  color: var(--ink-muted);
+}
+
+.card > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 1.5rem;
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+
+.card > footer p {
+  margin: 0;
+  color: var(--ink-muted);
+}
+
+.card > footer strong {
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.card-arrow {
+  color: var(--brass-ink);
+  transition: translate 0.2s var(--ease-out);
+}
+
+.card-link {
+  text-decoration: none;
+}
+
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.card-link:focus-visible {
+  outline: none;
+}
+
+.card:has(.card-link:focus-visible) {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+.card:has(.card-link:hover) {
+  box-shadow: var(--shadow-lg);
+}
+
+.card:has(.card-link:hover) .card-arrow {
+  translate: 0.3rem 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card > picture img {
+    transition: scale 0.6s var(--ease-out);
+  }
+
+  .card:has(.card-link:hover) > picture img {
+    scale: 1.04;
+  }
+}
+
+
+/* 6. EN-TÊTE ET NAVIGATION -------------------------------------------------
+   - L'en-tête reste collé en haut de l'écran (sticky).
+   - Variante « overlay » (page d'accueil) : transparent au-dessus de la grande
+     photo, puis fond vert qui apparaît en défilant (animation liée au défilement).
+     Navigateurs anciens : fond vert d'emblée, toujours lisible.
+   - Il se masque quand on descend et revient dès qu'on remonte.
+   - Navigation : liens en ligne s'ils tiennent, sinon bouton « Menu »
+     (décidé par main.js en mesurant la place disponible ; sans JS : bouton Menu). */
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  color: var(--ivory);
+  view-transition-name: site-header;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header {
+    transition: translate 0.35s var(--ease-out);
+  }
+}
+
+/* Fond de l'en-tête (calque séparé pour pouvoir l'estomper sans toucher au texte) */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--green-900);
+  border-block-end: 1px solid rgb(201 166 107 / 0.2);
+  box-shadow: 0 12px 30px -20px rgb(0 0 0 / 0.6);
+}
+
+/* Masquer l'en-tête en descendant : natif (Chrome) … */
+@container root-scroller scroll-state((scrolled: bottom) and (scrollable: top)) {
+  .site-header:not(:focus-within) {
+    translate: 0 -100%;
+  }
+}
+
+/* … et classe ajoutée par main.js dans les autres navigateurs */
+.site-header.is-hidden:not(:focus-within) {
+  translate: 0 -100%;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-block-size: var(--header-h);
+}
+
+/* Garde la largeur naturelle de la ligne mesurable (voir main.js) */
+.header-inner > * {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.is-measuring,
+.is-measuring * {
+  transition: none !important;
+}
+
+/* Logo : monogramme + nom */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-monogram {
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--brass-light);
+  border-radius: 50%;
+  color: var(--brass-light);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.brand-text {
+  display: grid;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.brand-tagline {
+  margin-block-start: 0.2rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+@media (width < 30rem) {
+  .brand-tagline { display: none; }
+  .brand-monogram { inline-size: 2.4rem; font-size: 1.1rem; }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgb(246 242 233 / 0.4);
+  border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  anchor-name: --menu-button;
+}
+
+.menu-button svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.site-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-menu a:not(.btn) {
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.site-menu a:not(.btn):hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* Page courante : soulignée (pas seulement une couleur) */
+.site-menu a[aria-current="page"] {
+  text-decoration: underline 2px var(--brass-light);
+  text-underline-offset: 0.45em;
+}
+
+/* Menu replié : panneau « popover » sous le bouton Menu */
+.site-header:not(.is-wide) .site-menu {
+  position: fixed;
+  inset: auto;
+  /* Repli si le navigateur ne gère pas anchor() : position fixe sous l'en-tête */
+  inset-block-start: var(--header-h);
+  inset-block-start: anchor(--menu-button bottom);
+  inset-inline-end: var(--gutter);
+  inline-size: min(80dvw, 22rem);
+  max-inline-size: calc(100dvw - 2rem);
+  block-size: fit-content;
+  max-block-size: calc(100dvh - 6rem);
+  margin: 0.75rem 0 0;
+  padding: 0.75rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: opacity 0.2s ease-out, display 0.2s, overlay 0.2s;
+  transition-behavior: allow-discrete;
+}
+
+.site-header:not(.is-wide) .site-menu:is(:popover-open, .\:popover-open) {
+  opacity: 1;
+}
+
+@starting-style {
+  .site-header:not(.is-wide) .site-menu:is(:popover-open, .\:popover-open) {
+    opacity: 0;
+  }
+}
+
+.site-header:not(.is-wide) .site-menu a:not(.btn) {
+  display: flex;
+  padding: 0.8rem 1rem;
+  font-size: 1.0625rem;
+}
+
+.site-header:not(.is-wide) .menu-cta {
+  margin-block-start: 0.5rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--line);
+}
+
+.site-header:not(.is-wide) .menu-cta .btn {
+  inline-size: 100%;
+}
+
+/* Menu en ligne (assez de place) */
+.site-header.is-wide .menu-button {
+  display: none;
+}
+
+.site-header.is-wide .site-menu {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  inline-size: auto;
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.site-header.is-wide .site-menu::backdrop {
+  display: none;
+}
+
+.site-header.is-wide .menu-cta {
+  margin-inline-start: 0.75rem;
+}
+
+@media (forced-colors: active) {
+  .site-menu a[aria-current="page"] { text-decoration-color: LinkText; }
+}
+
+
+/* 7. PAGE D'ACCUEIL -------------------------------------------------------- */
+
+/* 7.1 Grande photo d'accueil */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-block-size: 100svh;
+  /* Remonte sous l'en-tête transparent */
+  margin-block-start: calc(-1 * var(--header-h));
+  padding-block: calc(var(--header-h) + 3rem) 2rem;
+  overflow: clip;
+  background: var(--green-950);
+  color: var(--ivory);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Voile dégradé pour la lisibilité du texte */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgb(14 33 22 / 0.6) 0%, rgb(14 33 22 / 0.05) 28%, rgb(14 33 22 / 0.3) 58%, rgb(14 33 22 / 0.9) 100%),
+    linear-gradient(90deg, rgb(14 33 22 / 0.55) 0%, rgb(14 33 22 / 0) 70%);
+}
+
+.hero-content {
+  align-self: end;
+}
+
+.hero-content > * {
+  max-inline-size: 46rem;
+}
+
+.hero h1 {
+  max-inline-size: 64rem;
+}
+
+.hero h1 em {
+  display: block;
+  color: var(--brass-light);
+}
+
+.hero-lead {
+  margin-block-start: 1.5rem;
+  font-size: var(--step-1);
+  color: rgb(246 242 233 / 0.88);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block-start: 2.25rem;
+}
+
+.hero-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.25rem;
+  margin-block-start: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  padding: 1.5rem 0 0;
+  border-block-start: 1px solid var(--line-light);
+  list-style: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(246 242 233 / 0.85);
+}
+
+.hero-credentials li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.hero-credentials li::before {
+  content: "";
+  inline-size: 0.35rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--brass-light);
+}
+
+/* 7.2 Prestations */
+.offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+.offers-more {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: 1.5rem;
+  margin-block-start: 1.5rem;
+}
+
+/* Tuiles : grands blocs cliquables (fond vert ou photo) */
+.tile {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-block-size: 22rem;
+  padding: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+  overflow: clip;
+  border-radius: var(--radius-lg);
+  color: var(--ivory);
+  background: var(--green-800);
+  transition: box-shadow 0.3s;
+}
+
+.tile h3 {
+  font-size: var(--step-3);
+}
+
+.tile > p:not(.eyebrow, .tile-cta) {
+  max-inline-size: 34rem;
+  margin: 1rem 0 0;
+  color: var(--text-on-dark);
+}
+
+.tile .chips {
+  margin-block-start: 1.5rem;
+}
+
+.tile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.75rem 0 0;
+  color: var(--brass-light);
+  font-weight: 600;
+}
+
+.tile-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/assets/img/contours.svg") right -18rem top -16rem / 48rem auto no-repeat;
+  opacity: 0.18;
+}
+
+.tile-photo > picture {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.tile-photo > picture img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.tile-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(14 33 22 / 0.1) 0%, rgb(14 33 22 / 0.85) 75%);
+}
+
+.tile:has(.card-link:hover) {
+  box-shadow: var(--shadow-lg);
+}
+
+.tile:has(.card-link:focus-visible) {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+.tile:has(.card-link:hover) .tile-cta span {
+  translate: 0.3rem 0;
+}
+
+.tile-cta span {
+  transition: translate 0.2s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tile-photo > picture img {
+    transition: scale 0.8s var(--ease-out);
+  }
+
+  .tile-photo:has(.card-link:hover) > picture img {
+    scale: 1.04;
+  }
+}
+
+/* 7.3 La méthode */
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: clamp(3rem, 2rem + 4vw, 6rem);
+  align-items: start;
+}
+
+.method-intro h2 em {
+  color: var(--brass-light);
+}
+
+.method-intro > p:not(.eyebrow) {
+  margin-block-start: 1.5rem;
+  font-size: var(--step-1);
+}
+
+.checklist {
+  display: grid;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+}
+
+/* Coche dessinée en CSS */
+.checklist li::before {
+  content: "";
+  flex: none;
+  inline-size: 0.85rem;
+  block-size: 0.45rem;
+  border-inline-start: 2px solid var(--brass-light);
+  border-block-end: 2px solid var(--brass-light);
+  rotate: -45deg;
+  translate: 0 -0.2em;
+}
+
+.stat {
+  margin: 2.75rem 0 0;
+  padding: 1.75rem 2rem;
+  border-inline-start: 2px solid var(--brass-light);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.stat blockquote {
+  margin: 0;
+}
+
+.stat blockquote p {
+  margin: 0;
+  color: var(--ivory);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.stat-number {
+  display: block;
+  color: var(--brass-light);
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.stat figcaption {
+  margin-block-start: 1rem;
+  color: rgb(246 242 233 / 0.7);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Le parcours de la méthode : du drapeau (green) au tee (départ) */
+.method-path {
+  padding: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-lg);
+  background: rgb(14 33 22 / 0.35);
+}
+
+.section-dark .path-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  color: var(--brass-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.path-label svg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+
+.method-steps {
+  position: relative;
+  display: grid;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Ligne pointillée qui relie les étapes */
+.method-steps::before {
+  content: "";
+  position: absolute;
+  inset-block: 2rem;
+  inset-inline-start: 1.5rem;
+  border-inline-start: 2px dashed rgb(201 166 107 / 0.45);
+}
+
+.method-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  column-gap: 1.25rem;
+  padding-block: 1.1rem;
+}
+
+.step-marker {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  inline-size: 3rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--brass-light);
+  border-radius: 50%;
+  background: var(--green-900);
+  color: var(--brass-light);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.method-steps h3 {
+  align-self: end;
+  font-size: var(--step-2);
+}
+
+.method-steps p {
+  margin: 0.35rem 0 0;
+  color: rgb(246 242 233 / 0.75);
+}
+
+/* 7.4 L'enseignant */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: clamp(2.5rem, 2rem + 4vw, 6rem);
+  align-items: center;
+}
+
+.about-media {
+  position: relative;
+  margin: 0;
+}
+
+.about-media img {
+  inline-size: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.about-badge {
+  position: absolute;
+  inset-inline-end: 1rem;
+  inset-block-end: 1.5rem;
+  display: grid;
+  padding: 1.1rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--green-800);
+  color: var(--ivory);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (width >= 64rem) {
+  .about-badge { inset-inline-end: -2rem; }
+}
+
+.about-badge span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+
+.about-badge strong {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.about-body .lead {
+  margin-block-start: 1.5rem;
+  font-size: var(--step-1);
+  color: var(--ink-muted);
+}
+
+.credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 1.25rem 2rem;
+  margin: 2.25rem 0;
+}
+
+.credentials div {
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--line);
+}
+
+.credentials dt {
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.credentials dd {
+  margin: 0.45rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.masterclasses {
+  margin-block-end: 2.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.masterclasses h3 {
+  margin-block-end: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass-ink);
+}
+
+.masterclasses ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+}
+
+.masterclasses li span {
+  color: var(--ink-muted);
+}
+
+/* 7.5 Bandeau photo « Sur le terrain » */
+.band {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-block-size: min(85svh, 46rem);
+  padding-block: var(--space-section);
+  overflow: clip;
+  color: var(--ivory);
+  background: var(--green-950);
+}
+
+.band-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.band-media img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(14 33 22 / 0.88) 0%, rgb(14 33 22 / 0.55) 45%, rgb(14 33 22 / 0.1) 100%);
+}
+
+.band-content > * {
+  max-inline-size: 36rem;
+}
+
+.band-content > p:not(.eyebrow) {
+  margin-block: 1.5rem 2rem;
+  font-size: var(--step-1);
+  color: rgb(246 242 233 / 0.88);
+}
+
+/* 7.6 Appel à l'action + tarifs */
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: clamp(3rem, 2rem + 4vw, 6rem);
+  align-items: center;
+}
+
+.cta-body > p:not(.eyebrow) {
+  margin-block: 1.5rem 2.25rem;
+  font-size: var(--step-1);
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.price-card {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.price-card h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 0.75rem;
+}
+
+.price-card h3 small {
+  color: var(--brass-ink);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.price-list {
+  margin: 0;
+}
+
+.price-list div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-block-end: 1px dashed var(--line);
+}
+
+.price-list dt {
+  font-weight: 500;
+}
+
+.price-list dt small,
+.price-list dd small {
+  color: var(--ink-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.price-list dt small {
+  display: block;
+}
+
+.price-list dd {
+  margin: 0;
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.section-dark .price-card p {
+  color: var(--ink-muted);
+}
+
+.price-note {
+  margin: 1rem 0 1.5rem;
+  font-size: 0.875rem;
+}
+
+.price-card .link-arrow {
+  color: var(--green-800);
+}
+
+
+/* 8. PIED DE PAGE ET BARRE MOBILE ----------------------------------------- */
+
+.site-footer {
+  padding-block: 4.5rem 2rem;
+  background: var(--green-950);
+  color: rgb(246 242 233 / 0.78);
+  font-size: 0.9375rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2.5rem;
+}
+
+@media (width >= 64rem) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+}
+
+.site-footer .brand {
+  color: var(--ivory);
+}
+
+.footer-about p {
+  max-inline-size: 26rem;
+  margin-block-start: 1.25rem;
+}
+
+.footer-title {
+  margin-block-end: 1rem;
+  color: var(--brass-light);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a,
+.site-footer address a {
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.site-footer address a:hover {
+  color: var(--ivory);
+  text-decoration: underline;
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+.site-footer address p {
+  margin-block-end: 0.5rem;
+}
+
+.footer-phone {
+  color: var(--ivory);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.pga-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block-start: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line-light);
+  border-radius: 999px;
+  color: var(--ivory);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pga-badge::before {
+  content: "";
+  inline-size: 0.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--brass-light);
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: 3.5rem;
+  padding-block-start: 1.5rem;
+  border-block-start: 1px solid var(--line-light);
+  font-size: 0.8125rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-bottom ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-bottom a {
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Barre de contact fixe en bas de l'écran (téléphones uniquement) */
+.mobile-cta {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding-block: 0.6rem max(0.6rem, env(safe-area-inset-bottom, 0px));
+  padding-inline: max(0.75rem, env(safe-area-inset-left, 0px)) max(0.75rem, env(safe-area-inset-right, 0px));
+  border-block-start: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  box-shadow: 0 -10px 30px -20px rgb(0 0 0 / 0.4);
+}
+
+.mobile-cta .btn {
+  min-block-size: 2.9rem;
+  padding-block: 0.6rem;
+}
+
+@media (width < 48rem) {
+  /* Laisse la place à la barre pour que le bas du pied de page reste visible */
+  .site-footer {
+    padding-block-end: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (width >= 48rem) {
+  .mobile-cta { display: none; }
+}
+
+
+/* 9. ANIMATIONS -------------------------------------------------------------
+   Toutes facultatives : sans elles, le contenu est simplement affiché.
+   - Désactivées si l'utilisateur a demandé « moins d'animations ».
+   - Animations liées au défilement (CSS natif, aucun JavaScript). */
+
+/* Transition douce entre les pages du site */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+/* En-tête de la page d'accueil : transparent en haut, fond vert en défilant.
+   Ce n'est qu'un fondu d'opacité, conservé même en « moins d'animations ». */
+@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+  @keyframes header-fill {
+    from { opacity: 0; }
+  }
+
+  .site-header[data-variant="overlay"]::before {
+    animation: header-fill linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0px 160px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    /* Apparition des blocs marqués .reveal quand ils entrent à l'écran */
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        translate: 0 2.5rem;
+      }
+    }
+
+    .reveal {
+      animation: reveal auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    /* Grande photo d'accueil : léger effet de profondeur en défilant */
+    @keyframes hero-parallax {
+      to {
+        translate: 0 18%;
+        scale: 1.06;
+      }
+    }
+
+    @keyframes hero-fade {
+      to {
+        opacity: 0;
+        translate: 0 -2rem;
+      }
+    }
+
+    .hero {
+      view-timeline: --hero;
+    }
+
+    .hero-media img {
+      animation: hero-parallax linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .hero-content {
+      animation: hero-fade linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 70%;
+    }
+
+    /* Bandeau photo : l'image défile un peu moins vite que la page */
+    @keyframes band-parallax {
+      from { translate: 0 -8%; }
+      to { translate: 0 8%; }
+    }
+
+    .band {
+      view-timeline: --band;
+    }
+
+    .band-media {
+      inset-block: -10%;
+      animation: band-parallax linear both;
+      animation-timeline: --band;
+    }
+  }
+}
