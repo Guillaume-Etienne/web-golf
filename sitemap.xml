@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Liste des pages pour les moteurs de recherche : ajouter ici chaque nouvelle page. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.dominiquetavernini.fr/</loc></url>
+  <url><loc>https://www.dominiquetavernini.fr/enseignant/</loc></url>
+  <url><loc>https://www.dominiquetavernini.fr/cours-et-tarifs/</loc></url>
+  <url><loc>https://www.dominiquetavernini.fr/escapades-et-sejours/</loc></url>
+  <url><loc>https://www.dominiquetavernini.fr/contact/</loc></url>
+  <url><loc>https://www.dominiquetavernini.fr/mentions-legales/</loc></url>
+</urlset>

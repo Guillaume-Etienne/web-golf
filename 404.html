@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Référencement : titre (≈ 60 caractères max) et description (≈ 155 caractères max) -->
+  <title>Page introuvable · Dominique Tavernini</title>
+  <meta name="description" content="Cette page n'existe pas ou a été déplacée.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#163323">
+
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Polices utilisées dès le premier écran : chargées en priorité -->
+  <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script type="module" src="/assets/js/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- ===================== EN-TÊTE (identique sur toutes les pages) =====================
+       data-variant="overlay" : en-tête transparent au-dessus de la grande photo.
+       À retirer sur les pages sans grande photo en haut.
+       aria-current="page" : à placer sur le lien de la page en cours. -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="/">
+        <span class="brand-monogram" aria-hidden="true">DT</span>
+        <span class="brand-text">
+          <span class="brand-name">Dominique Tavernini</span>
+          <span class="brand-tagline">Enseignant de golf · PGA France</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span>Menu</span>
+        </button>
+        <ul id="site-menu" class="site-menu" popover="auto">
+          <li><a href="/enseignant/">L'enseignant</a></li>
+          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li class="menu-cta">
+            <a class="btn btn-primary btn-small" href="tel:+33608034194">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+              06 08 03 41 94
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== BANDEAU DE TITRE ===================== -->
+    <header class="page-hero section-dark">
+      <div class="container">
+        <p class="eyebrow">Erreur 404</p>
+        <h1>Balle <em>perdue…</em></h1>
+        <p class="lead">La page que vous cherchez n'existe pas ou a été déplacée. Reprenons depuis le départ&nbsp;!</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-large" href="/">Retour à l'accueil</a>
+          <a class="btn btn-ghost btn-large" href="/cours-et-tarifs/">Cours &amp; tarifs</a>
+        </div>
+      </div>
+    </header>
+
+  </main>
+
+
+  <!-- ===================== PIED DE PAGE (identique sur toutes les pages) ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="/">
+          <span class="brand-monogram" aria-hidden="true">DT</span>
+          <span class="brand-text">
+            <span class="brand-name">Dominique Tavernini</span>
+            <span class="brand-tagline">Enseignant de golf</span>
+          </span>
+        </a>
+        <p>Leçons, parcours accompagnés et stages de golf pour tous les niveaux, sur les golfs du Var et de la région.</p>
+        <p class="pga-badge">Membre PGA France</p>
+      </div>
+
+      <nav aria-labelledby="footer-nav-title">
+        <h2 class="footer-title" id="footer-nav-title">Navigation</h2>
+        <ul class="footer-links">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/enseignant/">L'enseignant</a></li>
+          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="footer-title">Contact</h2>
+        <address>
+          <p><a class="footer-phone" href="tel:+33608034194">06 08 03 41 94</a></p>
+          <p>Var (83) · golfs du département et de la région</p>
+          <p><a href="/contact/">Formulaire de contact</a></p>
+        </address>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Dominique Tavernini · Enseignant de golf</p>
+      <ul>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/mentions-legales/#credits">Crédits photos</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Barre de contact fixe : affichée uniquement sur téléphone (voir style.css §8) -->
+  <aside class="mobile-cta" aria-label="Contact rapide">
+    <a class="btn btn-primary" href="tel:+33608034194">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+      Appeler
+    </a>
+    <a class="btn btn-dark" href="/contact/">Réserver</a>
+  </aside>
+</body>
+</html>

@@ -85,3 +85,117 @@ if (header && !CSS.supports("container-type", "scroll-state")) {
     { passive: true },
   );
 }
+
+// 4. FORMULAIRE DE CONTACT (page /contact/) ---------------------------------------
+// Réglages dans le HTML du formulaire (voir AGENTS.md) :
+//  - action : adresse du service qui reçoit les messages (Google Forms ou autre) ;
+//  - data-google-entries : correspondance « nom du champ → entry.XXXX » de Google Forms.
+const contactForm = document.querySelector("[data-contact-form]");
+if (contactForm) setupContactForm(contactForm);
+
+function setupContactForm(form) {
+  const status = form.querySelector("[data-form-status]");
+  const submitButton = form.querySelector('[type="submit"]');
+  const fields = [...form.querySelectorAll("input, select, textarea")];
+
+  // 4.1 Prestation présélectionnée depuis un lien (ex. /contact/?prestation=carte-verte)
+  //     Le lien utilise le data-slug de l'option (la valeur envoyée reste le libellé lisible).
+  const wanted = new URLSearchParams(location.search).get("prestation");
+  const option = wanted && form.querySelector(`option[data-slug="${CSS.escape(wanted)}"]`);
+  if (option) option.selected = true;
+
+  // 4.2 Erreurs accessibles : aria-invalid suit l'état visuel :user-invalid,
+  // et le message d'erreur (id dans data-error) n'est relié au champ que s'il est affiché.
+  const linkError = (field, shown) => {
+    const errorId = field.dataset.error;
+    if (!errorId) return;
+    const ids = (field.getAttribute("aria-describedby") || "").split(/\s+/).filter((id) => id && id !== errorId);
+    if (shown) ids.push(errorId);
+    if (ids.length) field.setAttribute("aria-describedby", ids.join(" "));
+    else field.removeAttribute("aria-describedby");
+  };
+
+  // Une seule zone d'annonce pour la page, lue un instant après la sortie du champ.
+  const announcer = document.createElement("div");
+  announcer.setAttribute("aria-live", "polite");
+  announcer.className = "visually-hidden";
+  document.body.append(announcer);
+  let announceTimer;
+  const announced = new WeakSet();
+
+  const syncAria = (field, announce = false) => {
+    if (!field.matches?.("input, select, textarea")) return;
+    const invalid = field.matches(":user-invalid");
+    field.setAttribute("aria-invalid", String(invalid));
+    linkError(field, invalid);
+    if (invalid && announce && !announced.has(field)) {
+      const error = document.getElementById(field.dataset.error);
+      if (error) {
+        clearTimeout(announceTimer);
+        announcer.textContent = "";
+        announceTimer = setTimeout(() => { announcer.textContent = error.textContent.trim(); }, 500);
+      }
+      announced.add(field);
+    }
+    if (!invalid) announced.delete(field);
+  };
+
+  fields.forEach((field) => syncAria(field));
+  form.addEventListener("blur", (e) => syncAria(e.target, true), true);
+  form.addEventListener("input", (e) => syncAria(e.target));
+  form.addEventListener("change", (e) => syncAria(e.target, true));
+  // Envoi refusé par le navigateur : il place lui-même le curseur sur le premier champ en erreur.
+  form.addEventListener("invalid", (e) => { announced.add(e.target); syncAria(e.target); }, true);
+
+  const showStatus = (state, message) => {
+    status.dataset.state = state;
+    status.textContent = message;
+  };
+
+  // 4.3 Envoi (déclenché seulement si tous les champs sont valides)
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+
+    // Champ piège rempli = robot : on fait semblant que tout va bien, sans rien envoyer.
+    if (data.get("site_web")) {
+      form.reset();
+      showStatus("success", "Merci, votre demande a bien été envoyée.");
+      return;
+    }
+    data.delete("site_web");
+
+    if (form.action.includes("VOTRE_ID")) {
+      showStatus("error", "Le formulaire n'est pas encore activé. Appelez-moi au 06 08 03 41 94.");
+      return;
+    }
+
+    const isGoogleForm = new URL(form.action).hostname === "docs.google.com";
+    let body = data;
+    if (isGoogleForm) {
+      // Google Forms attend ses propres noms de champs (entry.XXXX).
+      const entries = JSON.parse(form.dataset.googleEntries || "{}");
+      body = new FormData();
+      for (const [name, value] of data) body.append(entries[name] ?? name, value);
+    }
+
+    submitButton.disabled = true; // évite un double envoi
+    showStatus("pending", "Envoi en cours…");
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body,
+        // Google Forms ne renvoie pas de réponse lisible : envoi « no-cors ».
+        ...(isGoogleForm ? { mode: "no-cors" } : { headers: { Accept: "application/json" } }),
+      });
+      if (!isGoogleForm && !response.ok) throw new Error(`HTTP ${response.status}`);
+      form.reset();
+      fields.forEach((field) => syncAria(field));
+      showStatus("success", "Merci, votre demande a bien été envoyée. Je vous recontacte rapidement pour organiser la séance.");
+    } catch {
+      showStatus("error", "L'envoi n'a pas abouti. Réessayez dans un instant ou appelez-moi au 06 08 03 41 94.");
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}

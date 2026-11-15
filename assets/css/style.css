@@ -12,6 +12,8 @@
    7. Page d'accueil : sections
    8. Pied de page et barre de contact mobile
    9. Animations (toujours facultatives : le site fonctionne sans)
+   10. Pages intérieures : bandeau de titre, tableaux de prix, accordéons,
+       grilles, formulaire de contact, mentions légales
    ========================================================================== */
 
 
@@ -1642,4 +1644,768 @@ a {
       animation-timeline: --band;
     }
   }
+}
+
+
+/* 10. PAGES INTÉRIEURES ---------------------------------------------------- */
+
+/* 10.1 Bandeau de titre en haut des pages (fond vert, sous le menu) */
+.page-hero {
+  padding-block: clamp(3.5rem, 2.5rem + 5vw, 7rem) clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+
+.page-hero h1 {
+  max-inline-size: 20ch;
+}
+
+.page-hero h1 em {
+  color: var(--brass-light);
+}
+
+.page-hero .lead {
+  max-inline-size: 44rem;
+  margin: 1.5rem 0 0;
+}
+
+/* Raccourcis vers les sections de la page */
+.page-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-nav a {
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--line-light);
+  border-radius: 999px;
+  color: var(--ivory);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.page-nav a:hover {
+  border-color: var(--brass-light);
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* 10.2 Blocs de contenu */
+.lead {
+  font-size: var(--step-1);
+  color: var(--ink-muted);
+}
+
+.section-dark .lead {
+  color: var(--text-on-dark);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: clamp(2.5rem, 2rem + 4vw, 6rem);
+  align-items: start;
+}
+
+.prose {
+  max-inline-size: 42rem;
+}
+
+.prose h2 + p {
+  margin-block-start: 1.5rem;
+}
+
+.prose h3 {
+  margin-block: 2.25rem 0.75rem;
+}
+
+.prose ul {
+  padding-inline-start: 1.2rem;
+}
+
+.prose li {
+  margin-block-end: 0.4rem;
+}
+
+.prose li::marker {
+  color: var(--brass);
+}
+
+.note {
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.subsection + .subsection {
+  margin-block-start: clamp(4rem, 3rem + 4vw, 6.5rem);
+  padding-block-start: clamp(4rem, 3rem + 4vw, 6.5rem);
+  border-block-start: 1px solid var(--line);
+}
+
+/* Appel à l'action centré en bas de page */
+.cta-simple {
+  text-align: center;
+}
+
+.cta-simple .section-head {
+  margin-inline: auto;
+  margin-block-end: 2rem;
+}
+
+.cta-simple .eyebrow,
+.cta-simple .cta-actions {
+  justify-content: center;
+}
+
+.btn-outline {
+  border-color: color-mix(in srgb, var(--green-800) 45%, transparent);
+  background: transparent;
+  color: var(--green-800);
+}
+
+.btn-outline:hover {
+  border-color: var(--green-800);
+  background: color-mix(in srgb, var(--green-800) 6%, transparent);
+}
+
+/* 10.3 Grilles de cartes simples (thèmes, axes, niveaux, masterclasses…) */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-grid--wide {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+/* Variante 3 colonnes maximum (ex. les 9 thèmes de perfectionnement) */
+.feature-grid--thirds {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.feature-grid > li {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.feature-grid h3 {
+  font-size: 1.5rem;
+}
+
+.feature-grid li p {
+  margin: 0.5rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.feature-grid li ul {
+  margin: 0.75rem 0 0;
+  padding-inline-start: 1.1rem;
+  color: var(--ink-muted);
+  font-size: 0.9375rem;
+}
+
+.feature-grid li li {
+  margin-block-end: 0.35rem;
+}
+
+.feature-grid li li::marker {
+  color: var(--brass);
+}
+
+/* Petit libellé au-dessus du titre d'une carte (ex. « Niveau 1 ») */
+.feature-grid .feature-tag {
+  margin: 0 0 0.6rem;
+  color: var(--brass-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Variante numérotée automatiquement (01, 02…) */
+.feature-grid--numbered {
+  counter-reset: feature;
+}
+
+.feature-grid--numbered > li {
+  counter-increment: feature;
+}
+
+.feature-grid--numbered > li::before {
+  content: counter(feature, decimal-leading-zero);
+  display: block;
+  margin-block-end: 0.75rem;
+  color: var(--brass-ink);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+/* 10.4 Tableaux de prix
+   Le tableau s'adapte à la largeur de son conteneur (requête de conteneur) :
+   avec .price-table--stack, il devient une liste de fiches quand la place manque.
+   Chaque cellule porte alors son libellé dans l'attribut data-label. */
+.table-wrapper {
+  container: price-table / inline-size;
+  max-inline-size: 100%;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.price-table {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.price-table caption {
+  padding: 1.5rem 1.5rem 0.5rem;
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 500;
+  text-align: start;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.95rem 1.1rem;
+  border-block-end: 1px solid var(--line);
+  text-align: start;
+  vertical-align: baseline;
+}
+
+.price-table thead th {
+  color: var(--brass-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.price-table tbody th {
+  font-weight: 600;
+}
+
+.price-table tbody tr:last-child > * {
+  border-block-end: 0;
+}
+
+.price-table th small {
+  display: block;
+  font-family: var(--font-sans);
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.price {
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.price small {
+  color: var(--ink-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+@container price-table (width < 30rem) {
+  .price-table--stack,
+  .price-table--stack :is(caption, thead, tbody, tr, th, td) {
+    display: block;
+  }
+
+  .price-table--stack thead {
+    display: none;
+  }
+
+  .price-table--stack tbody tr {
+    padding: 0.75rem 1.5rem;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .price-table--stack tbody tr:last-child {
+    border-block-end: 0;
+  }
+
+  .price-table--stack tbody th {
+    padding: 0 0 0.35rem;
+    border: 0;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .price-table--stack td {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    padding: 0.35rem 0;
+    border: 0;
+  }
+
+  .price-table--stack td::before {
+    content: attr(data-label);
+    margin-inline-end: auto;
+    color: var(--ink-muted);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+}
+
+/* 10.5 Accordéons (questions, conditions) : éléments <details> natifs */
+.accordion {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.accordion details {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron dessiné en CSS, juste avant le texte : vers la droite fermé, vers le bas ouvert */
+.accordion summary::before {
+  content: "";
+  flex: none;
+  inline-size: 0.55rem;
+  block-size: 0.55rem;
+  border-inline-end: 2px solid var(--brass);
+  border-block-end: 2px solid var(--brass);
+  rotate: -45deg;
+}
+
+.accordion details[open] > summary::before {
+  rotate: 45deg;
+}
+
+.accordion details > :not(summary) {
+  margin: 0;
+  padding: 0 1.25rem 1.25rem 2.7rem;
+  color: var(--ink-muted);
+}
+
+/* Ouverture animée (navigateurs compatibles ; sinon ouverture instantanée) */
+.accordion details::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+
+.accordion details:not([open])::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .accordion summary::before {
+    transition: rotate 0.2s;
+  }
+
+  .accordion details::details-content {
+    transition: block-size, content-visibility, display;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+}
+
+/* 10.6 Page Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: clamp(2.5rem, 2rem + 4vw, 5rem);
+  align-items: start;
+}
+
+@media (width >= 64rem) {
+  .contact-grid { grid-template-columns: 2fr 3fr; }
+}
+
+.contact-card {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--green-900);
+  color: var(--ivory);
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/assets/img/contours.svg") right -16rem bottom -18rem / 44rem auto no-repeat;
+  opacity: 0.18;
+}
+
+.contact-card h2 {
+  font-size: var(--step-2);
+}
+
+.contact-card p {
+  color: var(--text-on-dark);
+}
+
+.contact-phone {
+  display: inline-block;
+  margin-block: 0.5rem 0.75rem;
+  color: var(--ivory);
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 1.6rem + 2vw, 2.9rem);
+  font-weight: 500;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+.contact-phone:hover {
+  color: var(--brass-light);
+}
+
+.contact-card hr {
+  margin: 1.75rem 0;
+  border: 0;
+  border-block-start: 1px solid var(--line-light);
+}
+
+/* 10.7 Formulaires */
+.form {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.form h2 {
+  font-size: var(--step-3);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1.5rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field > label,
+.choices legend {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.required {
+  color: var(--brass-ink);
+}
+
+.hint {
+  color: var(--ink-muted);
+  font-size: 0.8125rem;
+}
+
+.field :is(input, select, textarea) {
+  inline-size: 100%;
+  min-block-size: 3rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #7c837e;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: max(1rem, 1em);
+  transition: border-color 0.2s;
+}
+
+.field :is(input, select, textarea):focus-visible {
+  border-color: var(--green-800);
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.field textarea {
+  min-block-size: 9rem;
+  resize: vertical;
+}
+
+/* Liste déroulante : flèche personnalisée */
+.field select {
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f3d2b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1.1rem;
+}
+
+/* Boutons radio présentés en pastilles (le bouton radio natif reste dessous) */
+.choices {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.choices legend {
+  margin-block-end: 0.5rem;
+  padding: 0;
+}
+
+.choices-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.choice {
+  position: relative;
+}
+
+.choice input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice label {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: max(var(--target-size), 2.6rem);
+  padding: 0.5rem 1rem;
+  border: 1px solid #7c837e;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* Choix sélectionné : fond vert ET coche (pas seulement une couleur) */
+.choice input:checked + label {
+  border-color: var(--green-800);
+  background: var(--green-800);
+  color: var(--ivory);
+}
+
+.choice input:checked + label::before {
+  content: "✓";
+  margin-inline-end: 0.4rem;
+}
+
+.choice input:focus-visible + label {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+/* Erreurs : affichées seulement après interaction (:user-invalid) */
+.error-msg {
+  display: none;
+  color: #a12a1f;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.field :is(input, select, textarea):user-invalid {
+  border-color: #a12a1f;
+  background-color: #fdf3f1;
+}
+
+.field :user-invalid ~ .error-msg {
+  display: block;
+}
+
+/* Champ piège anti-robots : invisible pour les visiteurs */
+.hp-field {
+  position: absolute;
+  inset-inline-start: -9999px;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+}
+
+.form-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+}
+
+.form-footer .note {
+  max-inline-size: 30rem;
+  margin: 0;
+  font-size: 0.8125rem;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+
+.form-status[data-state="success"] {
+  background: #e6efe7;
+  color: var(--green-800);
+}
+
+.form-status[data-state="error"] {
+  background: #fdf3f1;
+  color: #a12a1f;
+}
+
+/* 10.8 Mentions légales */
+.legal h2 {
+  margin-block: 3rem 1rem;
+  font-size: var(--step-2);
+}
+
+.legal h2:first-child {
+  margin-block-start: 0;
+}
+
+.legal dl {
+  margin: 0 0 1em;
+}
+
+.legal dl div {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) 1fr;
+  gap: 0.15rem 1.5rem;
+  padding-block: 0.6rem;
+  border-block-end: 1px solid var(--line);
+}
+
+@media (width < 36rem) {
+  .legal dl div { grid-template-columns: 1fr; }
+}
+
+.legal dt {
+  font-weight: 600;
+}
+
+.legal dd {
+  margin: 0;
+}
+
+/* Information à compléter : très visible pour ne pas l'oublier avant la mise en ligne */
+.todo {
+  padding: 0.05em 0.35em;
+  border-radius: 0.25rem;
+  background: #fde9a8;
+  color: #5a4300;
+  font-weight: 600;
+}
+
+/* 10.9 Compléments */
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Image placée à côté d'un texte (.split) */
+.split-media img {
+  inline-size: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* Espacement des grilles qui suivent un bloc texte + image */
+.split + .feature-grid,
+.feature-grid + .feature-grid {
+  margin-block-start: 2.5rem;
+}
+
+.section-cta {
+  margin: 2.5rem 0 0;
+}
+
+/* Encadré tarif utilisé dans les pages (même style que sur l'accueil) */
+.price-card h4 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 0.75rem;
+  font-size: var(--step-2);
+}
+
+.price-card h4 small {
+  color: var(--brass-ink);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Liste de destinations */
+.prose .destination-list,
+.destination-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.destination-list li {
+  margin: 0;
+  padding-block: 0.6rem;
+  border-block-end: 1px solid var(--line);
+  color: var(--green-800);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+}
+
+.form-status[data-state="pending"] {
+  background: var(--ivory-2);
+  color: var(--ink);
 }

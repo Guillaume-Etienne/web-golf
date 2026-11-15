@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Référencement : titre (≈ 60 caractères max) et description (≈ 155 caractères max) -->
+  <title>Contact · Dominique Tavernini, enseignant de golf dans le Var</title>
+  <meta name="description" content="Réservez une leçon, un parcours accompagné ou un stage de golf dans le Var : appelez le 06 08 03 41 94 ou envoyez une demande en ligne.">
+  <link rel="canonical" href="https://www.dominiquetavernini.fr/contact/">
+  <meta name="theme-color" content="#163323">
+
+  <!-- Partage sur les réseaux sociaux -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Dominique Tavernini · Enseignant de golf">
+  <meta property="og:title" content="Contact · Dominique Tavernini, enseignant de golf dans le Var">
+  <meta property="og:description" content="Réservez une leçon, un parcours accompagné ou un stage de golf dans le Var : appelez le 06 08 03 41 94 ou envoyez une demande en ligne.">
+  <meta property="og:url" content="https://www.dominiquetavernini.fr/contact/">
+  <meta property="og:image" content="https://www.dominiquetavernini.fr/assets/img/og-image.jpg">
+
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Polices utilisées dès le premier écran : chargées en priorité -->
+  <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script type="module" src="/assets/js/main.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- ===================== EN-TÊTE (identique sur toutes les pages) =====================
+       data-variant="overlay" : en-tête transparent au-dessus de la grande photo.
+       À retirer sur les pages sans grande photo en haut.
+       aria-current="page" : à placer sur le lien de la page en cours. -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="/">
+        <span class="brand-monogram" aria-hidden="true">DT</span>
+        <span class="brand-text">
+          <span class="brand-name">Dominique Tavernini</span>
+          <span class="brand-tagline">Enseignant de golf · PGA France</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <button class="menu-button" type="button" popovertarget="site-menu" popovertargetaction="toggle" aria-controls="site-menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span>Menu</span>
+        </button>
+        <ul id="site-menu" class="site-menu" popover="auto">
+          <li><a href="/enseignant/">L'enseignant</a></li>
+          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="/contact/" aria-current="page">Contact</a></li>
+          <li class="menu-cta">
+            <a class="btn btn-primary btn-small" href="tel:+33608034194">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+              06 08 03 41 94
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== BANDEAU DE TITRE ===================== -->
+    <header class="page-hero section-dark">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1>Parlons de <em>votre golf.</em></h1>
+        <p class="lead">Une question, une envie de leçon, de parcours ou de stage&nbsp;? Appelez-moi ou envoyez une demande : je vous recontacte pour fixer le créneau.</p>
+      </div>
+    </header>
+
+
+    <section class="section" aria-label="Coordonnées et formulaire de contact">
+      <div class="container contact-grid">
+
+        <aside class="contact-card reveal" aria-labelledby="telephone-title">
+          <p class="eyebrow">Par téléphone</p>
+          <h2 id="telephone-title">Le plus simple pour réserver</h2>
+          <a class="contact-phone" href="tel:+33608034194">06 08 03 41 94</a>
+          <p>Si je suis en cours, laissez-moi un message.</p>
+          <hr>
+          <p><strong>Où&nbsp;?</strong> Sur les golfs du Var (83) et de la région : nous choisissons ensemble le parcours.</p>
+          <p class="pga-badge">Membre PGA France</p>
+        </aside>
+
+        <!-- ===================== FORMULAIRE =====================
+             Envoi vers Google Forms (ou un autre service) : voir AGENTS.md, « Relier le formulaire ».
+             - action : adresse « formResponse » du Google Form (remplacer VOTRE_ID_DE_FORMULAIRE)
+             - data-google-entries : numéro « entry.XXXX » de chaque question du Google Form -->
+        <form class="form reveal" data-contact-form method="post"
+              action="https://docs.google.com/forms/d/e/VOTRE_ID_DE_FORMULAIRE/formResponse"
+              data-google-entries='{"nom": "entry.0000000001", "email": "entry.0000000002", "telephone": "entry.0000000003", "prestation": "entry.0000000004", "niveau": "entry.0000000005", "message": "entry.0000000006"}'
+              aria-labelledby="form-title">
+          <h2 id="form-title">Envoyer une demande</h2>
+          <p class="hint">Les champs marqués d'un astérisque (<span class="required">*</span>) sont obligatoires.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="nom">Nom et prénom <span class="required" aria-hidden="true">*</span></label>
+              <input id="nom" name="nom" type="text" autocomplete="name" maxlength="100" required data-error="nom-error">
+              <p id="nom-error" class="error-msg">Erreur : indiquez votre nom.</p>
+            </div>
+            <div class="field">
+              <label for="telephone">Téléphone</label>
+              <input id="telephone" name="telephone" type="tel" autocomplete="tel" maxlength="20">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail <span class="required" aria-hidden="true">*</span></label>
+            <span id="email-hint" class="hint">Format : vous@exemple.fr</span>
+            <input id="email" name="email" type="email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" maxlength="150" required aria-describedby="email-hint" data-error="email-error">
+            <p id="email-error" class="error-msg">Erreur : saisissez une adresse e-mail au format vous@exemple.fr.</p>
+          </div>
+
+          <div class="field">
+            <label for="prestation">Prestation souhaitée</label>
+            <select id="prestation" name="prestation">
+              <option value="">Je ne sais pas encore</option>
+              <option value="Leçon individuelle" data-slug="lecon-individuelle">Leçon individuelle</option>
+              <option value="Cours duo" data-slug="cours-duo">Cours duo</option>
+              <option value="Cours collectif" data-slug="cours-collectif">Cours collectif</option>
+              <option value="Parcours accompagné" data-slug="parcours-accompagne">Parcours accompagné</option>
+              <option value="Stage petit jeu" data-slug="stage-petit-jeu">Stage petit jeu</option>
+              <option value="Formation carte verte" data-slug="carte-verte">Formation carte verte</option>
+              <option value="Perfectionnement" data-slug="perfectionnement">Perfectionnement</option>
+              <option value="Escapades et séjours" data-slug="escapades">Escapades &amp; séjours</option>
+              <option value="Autre demande" data-slug="autre">Autre demande</option>
+            </select>
+          </div>
+
+          <fieldset class="choices">
+            <legend>Votre niveau</legend>
+            <div class="choices-list">
+              <div class="choice"><input type="radio" id="niveau-1" name="niveau" value="Débutant"><label for="niveau-1">Débutant</label></div>
+              <div class="choice"><input type="radio" id="niveau-2" name="niveau" value="Carte verte"><label for="niveau-2">Carte verte</label></div>
+              <div class="choice"><input type="radio" id="niveau-3" name="niveau" value="Joueur classé"><label for="niveau-3">Joueur classé</label></div>
+              <div class="choice"><input type="radio" id="niveau-4" name="niveau" value="Je ne sais pas"><label for="niveau-4">Je ne sais pas</label></div>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="message">Votre message <span class="required" aria-hidden="true">*</span></label>
+            <span id="message-hint" class="hint">Vos disponibilités, le golf où vous jouez, votre objectif… (10 caractères minimum)</span>
+            <textarea id="message" name="message" minlength="10" maxlength="1500" required aria-describedby="message-hint" data-error="message-error"></textarea>
+            <p id="message-error" class="error-msg">Erreur : écrivez un message d'au moins 10 caractères.</p>
+          </div>
+
+          <!-- Champ piège anti-robots : doit rester vide -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="site_web">Ne pas remplir ce champ</label>
+            <input id="site_web" name="site_web" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="form-status" data-form-status role="status"></p>
+
+          <div class="form-footer">
+            <p class="note">Vos informations servent uniquement à répondre à votre demande. <a href="/mentions-legales/#donnees">Données personnelles</a></p>
+            <button class="btn btn-dark btn-large" type="submit">Envoyer ma demande</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================== PIED DE PAGE (identique sur toutes les pages) ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="/">
+          <span class="brand-monogram" aria-hidden="true">DT</span>
+          <span class="brand-text">
+            <span class="brand-name">Dominique Tavernini</span>
+            <span class="brand-tagline">Enseignant de golf</span>
+          </span>
+        </a>
+        <p>Leçons, parcours accompagnés et stages de golf pour tous les niveaux, sur les golfs du Var et de la région.</p>
+        <p class="pga-badge">Membre PGA France</p>
+      </div>
+
+      <nav aria-labelledby="footer-nav-title">
+        <h2 class="footer-title" id="footer-nav-title">Navigation</h2>
+        <ul class="footer-links">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/enseignant/">L'enseignant</a></li>
+          <li><a href="/cours-et-tarifs/">Cours &amp; tarifs</a></li>
+          <li><a href="/escapades-et-sejours/">Escapades &amp; séjours</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="footer-title">Contact</h2>
+        <address>
+          <p><a class="footer-phone" href="tel:+33608034194">06 08 03 41 94</a></p>
+          <p>Var (83) · golfs du département et de la région</p>
+          <p><a href="/contact/">Formulaire de contact</a></p>
+        </address>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Dominique Tavernini · Enseignant de golf</p>
+      <ul>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/mentions-legales/#credits">Crédits photos</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Barre de contact fixe : affichée uniquement sur téléphone (voir style.css §8) -->
+  <aside class="mobile-cta" aria-label="Contact rapide">
+    <a class="btn btn-primary" href="tel:+33608034194">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+      Appeler
+    </a>
+    <a class="btn btn-dark" href="/contact/">Réserver</a>
+  </aside>
+</body>
+</html>
